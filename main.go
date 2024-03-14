@@ -50,3 +50,7 @@ func GetDateStamp(t time.Time) string {
 func NormalizeUsername(username string) string {
 	return strings.TrimSpace(strings.ToLower(username))
 }
+
+func NormalizedEloginToken(token string) string {
+	return strings.Replace(token, "_", ".", 1)
+}
