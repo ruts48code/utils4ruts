@@ -74,7 +74,7 @@ func CheckEpassportType(namex string) string {
 	return "staff"
 }
 
-func ProcessConfig(filename string, conf interface{}) {
+func ProcessConfig(filename string, conf *interface{}) {
 	confdata := ReadFile(filename)
-	yaml.Unmarshal(confdata, &conf)
+	yaml.Unmarshal(confdata, conf)
 }
