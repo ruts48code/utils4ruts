@@ -7,6 +7,7 @@ import (
 	"time"
 
 	random "github.com/ruts48code/random4ruts"
+	"gopkg.in/yaml.v3"
 )
 
 func ReadFile(f string) []byte {
@@ -71,4 +72,9 @@ func CheckEpassportType(namex string) string {
 		}
 	}
 	return "staff"
+}
+
+func ProcessConfig(filename string, conf *interface{}) {
+	confdata := ReadFile(filename)
+	yaml.Unmarshal(confdata, &conf)
 }
