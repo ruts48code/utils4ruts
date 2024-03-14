@@ -54,3 +54,21 @@ func NormalizeUsername(username string) string {
 func NormalizedEloginToken(token string) string {
 	return strings.Replace(token, "_", ".", 1)
 }
+
+func CheckEpassportType(namex string) string {
+
+	name := strings.ToLower(strings.TrimSpace(namex))
+
+	if len(name) < 2 {
+		return "error"
+	}
+
+	switch name[0] {
+	case 's':
+		switch name[1] {
+		case '0', '1', '2', '3', '4', '5', '6', '7', '8', '9':
+			return "student"
+		}
+	}
+	return "staff"
+}
