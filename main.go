@@ -2,7 +2,6 @@ package utils4ruts
 
 import (
 	"crypto/tls"
-	"fmt"
 	"io"
 	"log"
 	"net/http"
@@ -20,10 +19,6 @@ func ReadFile(f string) []byte {
 		return []byte("")
 	}
 	return content
-}
-
-func MakeString(s string) string {
-	return fmt.Sprintf("%s", s)
 }
 
 func RandomArrayString(data []string) []string {
