@@ -2,6 +2,9 @@ package utils4ruts
 
 import (
 	"fmt"
+	"io"
+	"log"
+	"net/http"
 	"os"
 	"strings"
 	"time"
@@ -79,4 +82,26 @@ func ProcessConfig(filename string, conf interface{}) {
 	xconf := conf
 	yaml.Unmarshal(confdata, xconf)
 	conf = xconf
+}
+
+func HTTPGet(url string) (output []byte) {
+	output = make([]byte, 0)
+	client := http.Client{}
+	res, err := client.Get(url)
+	if err != nil {
+		log.Printf("Error: %v\n", err)
+		return
+	}
+	defer res.Body.Close()
+
+	if res.StatusCode != http.StatusOK {
+		log.Printf("Error: http - %d\n", res.StatusCode)
+		return
+	}
+	output, err = io.ReadAll(res.Body)
+	if err != nil {
+		log.Printf("Error: %v\n", err)
+		return
+	}
+	return
 }
