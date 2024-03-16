@@ -1,6 +1,7 @@
 package utils4ruts
 
 import (
+	"crypto/tls"
 	"fmt"
 	"io"
 	"log"
@@ -86,7 +87,10 @@ func ProcessConfig(filename string, conf interface{}) {
 
 func HTTPGet(url string) (output []byte) {
 	output = make([]byte, 0)
-	client := http.Client{}
+	tr := &http.Transport{
+		TLSClientConfig: &tls.Config{InsecureSkipVerify: true},
+	}
+	client := http.Client{Transport: tr}
 	res, err := client.Get(url)
 	if err != nil {
 		log.Printf("Error: %v\n", err)
