@@ -16,6 +16,7 @@ import (
 func ReadFile(f string) []byte {
 	content, err := os.ReadFile(f)
 	if err != nil {
+		log.Printf("Error: utils4ruts-ReadFile - %v\n", err)
 		return []byte("")
 	}
 	return content
@@ -88,18 +89,18 @@ func HTTPGet(url string) (output []byte) {
 	client := http.Client{Transport: tr}
 	res, err := client.Get(url)
 	if err != nil {
-		log.Printf("Error: %v\n", err)
+		log.Printf("Error: utils4ruts-HTTPGet 1 - Get error - %v\n", err)
 		return
 	}
 	defer res.Body.Close()
 
 	if res.StatusCode != http.StatusOK {
-		log.Printf("Error: http - %d\n", res.StatusCode)
+		log.Printf("Error: utils4ruts-HTTPGet 2 - http return code is not ok - %d\n", res.StatusCode)
 		return
 	}
 	output, err = io.ReadAll(res.Body)
 	if err != nil {
-		log.Printf("Error: %v\n", err)
+		log.Printf("Error: utils4ruts-HTTPGet 3 - cannot read body - %v\n", err)
 		return
 	}
 	return
