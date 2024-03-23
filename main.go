@@ -9,6 +9,7 @@ import (
 	"strings"
 	"time"
 
+	hcl "github.com/hashicorp/hcl/v2/hclsimple"
 	random "github.com/ruts48code/random4ruts"
 	"gopkg.in/yaml.v3"
 )
@@ -79,6 +80,14 @@ func ProcessConfig(filename string, conf interface{}) {
 	xconf := conf
 	yaml.Unmarshal(confdata, xconf)
 	conf = xconf
+}
+
+func ProcessConfigHCL(filename string, conf interface{}) {
+	err := hcl.DecodeFile(filename, nil, conf)
+	if err != nil {
+		log.Fatalf("Failed to load configuration: %s", err)
+		panic(err)
+	}
 }
 
 func HTTPGet(url string) (output []byte) {
