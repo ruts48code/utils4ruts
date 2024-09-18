@@ -2,6 +2,7 @@ package utils4ruts
 
 import (
 	"crypto/tls"
+	"fmt"
 	"io"
 	"log"
 	"net/http"
@@ -39,6 +40,10 @@ func RandomArrayString(data []string) []string {
 
 func DeleteArrayString(data []string, n int) []string {
 	return append(data[:n], data[n+1:]...)
+}
+
+func GetUnixTime(t time.Time) string {
+	return fmt.Sprintf("%d", t.Unix())
 }
 
 func GetTimeStamp(t time.Time) string {
