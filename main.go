@@ -126,3 +126,7 @@ func FileExist(filename string) bool {
 	}
 	return true
 }
+
+func MakeString(s string) string {
+	return fmt.Sprintf("%s", s)
+}
