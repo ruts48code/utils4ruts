@@ -134,5 +134,5 @@ func MakeString(s string) string {
 
 func UUIDRuts() string {
 	uuid, _ := uuid.NewV7()
-	return fmt.Sprintf("%d", time.Now().UnixNano()) + ":" + uuid.String()
+	return fmt.Sprintf("%d", time.Now().UnixNano()) + "x" + strings.Replace(uuid.String(), "-", "x", -1)
 }
