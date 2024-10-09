@@ -10,6 +10,7 @@ import (
 	"strings"
 	"time"
 
+	"github.com/google/uuid"
 	hcl "github.com/hashicorp/hcl/v2/hclsimple"
 	random "github.com/ruts48code/random4ruts"
 	"gopkg.in/yaml.v3"
@@ -129,4 +130,9 @@ func FileExist(filename string) bool {
 
 func MakeString(s string) string {
 	return fmt.Sprintf("%s", s)
+}
+
+func UUIDRuts() string {
+	uuid, _ := uuid.NewV7()
+	return fmt.Sprintf("%d", time.Now().UnixNano()) + ":" + uuid.String()
 }
